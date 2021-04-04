@@ -25,7 +25,7 @@ server = app.server
 
 
 device = torch.device('cpu')
-model = torch.load('model_conv_resnext50.pth', map_location=device)
+model = torch.load('model_conv_resnet50.pth', map_location=device)
 labels = np.array(open("class.txt").read().splitlines())
 
 preprocess = transforms.Compose([
