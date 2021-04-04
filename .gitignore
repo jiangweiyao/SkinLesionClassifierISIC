@@ -1,4 +1,4 @@
 *.zip
-*.pth
+model_conv*.pth
 data/
 .ipynb_checkpoints
