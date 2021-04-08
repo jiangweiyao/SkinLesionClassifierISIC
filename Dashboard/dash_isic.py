@@ -75,8 +75,8 @@ def parse_contents(contents, filename, date):
     image_pil = Image.open(bytes_image).convert('RGB')
     image = cv2.imdecode(np.frombuffer(decoded_image, np.uint8), 1)
 
-    blur_threshold = 30
-    contrast_threshold = 0.25
+    blur_threshold = 10
+    contrast_threshold = 0.05
 
     blur_measure = cv2.Laplacian(image, cv2.CV_64F).var()
     if blur_measure > blur_threshold:
@@ -109,8 +109,6 @@ def parse_contents(contents, filename, date):
     df = pd.DataFrame({'Class':labels, 'Probability':prob[0].detach().numpy()*100})
     output_table = generate_table(df.sort_values(['Probability'], ascending=[False]))
 
-
-
     if blur_measure > blur_threshold and threshold > contrast_threshold:
         if prediction == labels[1] :
             output_text = html.H4(f"Please schedule patient for a consultation.", style={'color': 'blue', 'font-weight' : 'bold' })
@@ -135,6 +133,8 @@ def parse_contents(contents, filename, date):
         #html.Strong(f"The brightness of this image is {brightness_mean}"),
         html.Br(),
         html.Img(src=contents, style={"max-height" : "500px" }),
+        html.Plaintext(filename),
+        html.Plaintext(datetime.datetime.now().strftime("%c")),
         html.Hr(),
         output_table
     ])
