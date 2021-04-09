@@ -111,11 +111,11 @@ def parse_contents(contents, filename, date):
 
     if blur_measure > blur_threshold and threshold > contrast_threshold:
         if prediction == labels[1] :
-            output_text = html.H4(f"Please schedule patient for a consultation.", style={'color': 'blue', 'font-weight' : 'bold' })
+            output_text = html.H3(f"Please schedule patient for a consultation.", style={'color': 'blue', 'font-weight' : 'bold' })
         elif prediction == labels[0]:
-            output_text = html.H4(f"Patient does not need another appointment.", style={'color': 'green', 'font-weight' : 'bold' })
+            output_text = html.H3(f"Patient does not need another appointment.", style={'color': 'green', 'font-weight' : 'bold' })
         else:
-            output_text = html.H4(f"Something went wrong")
+            output_text = html.H3(f"Something went wrong")
 
 
     else:
